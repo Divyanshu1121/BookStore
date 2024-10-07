@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Book</title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <div class="col-md-10">
+                <table class="table table-dark table-bordered">
+                    <caption class="caption-top">
+                        <h1>Edit Book Data</h1>
+                    </caption>
+                    <form action="/insertData" method="post">
+                        <input type="hidden" name="editId" value="<%= data._id %>">
+                        <tr>
+                            <td class="fs-4">Title</td>
+                            <td><input type="text" name="title" class="form-control" value="<%= data.title %>" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fs-4">Price</td>
+                            <td><input type="number" name="price" class="form-control" value="<%= data.price %>"
+                                    required></td>
+                        </tr>
+                        <tr>
+                            <td class="fs-4">Author</td>
+                            <td><input type="text" name="author" class="form-control" value="<%= data.author %>"
+                                    required></td>
+                        </tr>
+                        <tr>
+                            <td class="fs-4">City</td>
+                            <td>
+                                <select name="city" class="form-select">
+                                    <option disabled selected> -- Select City -- </option>
+                                    <% let city=['Surat','Mumbai','Vadodra','Bharuch','Nasik','Ahmedabad'] %>
+                                        <% city.map(val=> { %>
+                                            <option value="<%= val %>" <% if(data.city==val) { %> selected <% } %>>
+                                                    <%= val %>
+                                            </option>
+                                            <% }) %>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fs-4">Pages</td>
+                            <td>
+                                <input type="radio" name="pages" value="50-100" <% if(data.pages=='50-100' ) { %>checked
+                                <% } %>> 50-100
+                                    <input type="radio" name="pages" value="100-200" <% if(data.pages=='100-200' ) {
+                                        %>checked<% } %>> 100-200
+                                        <input type="radio" name="pages" value="300-400" <% if(data.pages=='300-400' ) {
+                                            %>checked<% } %>> 300-400
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fs-4">Language</td>
+                            <td>
+                                <input type="checkbox" name="language" value="Gujarati" <%
+                                    if(data.language.includes('Gujarati')) { %>checked<% } %>> Gujarati
+                                    <input type="checkbox" name="language" value="Hindi" <%
+                                        if(data.language.includes('Hindi')) { %>checked<% } %>> Hindi
+                                        <input type="checkbox" name="language" value="English" <%
+                                            if(data.language.includes('English')) { %>checked<% } %>> English
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fs-4">Description</td>
+                            <td><textarea name="description" class="form-control"
+                                    required><%= data.description %></textarea></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="submit" value="Edit Data" class="btn btn-outline-light "></td>
+                        </tr>
+                    </form>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
